@@ -1,0 +1,244 @@
+@import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Playwrite+HR+Lijeva+Guides&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", serif;
+  box-sizing: border-box;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.image-section img {
+  margin-top: 80px;
+  margin-left: 100px;
+  width: 510px;
+  height: 529px;
+}
+.login-section {
+  margin-top: 70px;
+  margin-left: 180px;
+  /* width:700px; */
+}
+.login-section h2 {
+  font-size: 2em;
+}
+.login-section p {
+  color: #8e8e93;
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+.credentials-section label[for="emailId"],
+label[for="password"],
+label[for="fullName"],
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  font-size: 18px;
+  display: block;
+  margin-top: 20px;
+}
+.mandatory {
+  color: red;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 35px;
+  width: 200px;
+  height: 30px;
+  font-size: 16px;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: grey;
+}
+/* #passwordErr{
+    margin-right: 50px;
+} */
+.credentials-section input[type="email"],
+.credentials-section input[type="password"],
+.credentials-section input[type="text"] {
+  margin-top: 5px;
+  margin-bottom: 25px;
+  height: 40px;
+  width: 440px;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 8px;
+}
+#login {
+  background-color: #f3bd00;
+  margin-top: 12px;
+  width: 440px;
+  border-radius: 100px;
+  font-size: 18px;
+  height: 40px;
+}
+.card {
+  display: flex;
+  margin-top: 40px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #fefefe;
+}
+.card img {
+  width: 20px;
+  height: 20px;
+}
+.card p {
+  margin-left: 10px;
+  margin-top: 30px;
+  color: #000;
+  font-size: 18px;
+}
+
+.middle {
+  text-align: center;
+  margin-top: 30px;
+  color: #8e8e93;
+  margin-top: 50px;
+  font-size: 18px;
+}
+a {
+  text-decoration: none;
+  color: #0948b4;
+  font-weight: bold;
+  font-size: 18px;
+}
+.middle > input[type="checkbox"] {
+  font-size: 20px;
+  margin-right: 10px;
+}
+button {
+  cursor: pointer;
+}
+
+/* Top Navbar */
+.navbar {
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 20px;
+}
+
+.admin-profile {
+  position: relative;
+}
+
+.admin-info {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-info img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: center;
+  right: 0;
+  margin-top: 10px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 200px;
+  display: none;
+  z-index: 10;
+}
+
+.dropdown p {
+  margin-bottom: 4px;
+}
+
+.logout-btn {
+  margin-top: 10px;
+  padding: 8px;
+  width: 100%;
+  background: #facc15;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+.sidebar {
+  width: 220px;
+  background: white;
+  padding: 20px;
+  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar h3 {
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #555;
+  gap: 10px;
+}
+
+.sidebar a.active {
+  color: #facc15;
+  font-weight: bold;
+}
+
+.admin-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
