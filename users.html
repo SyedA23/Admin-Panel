@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="logo">
+        <img src="./assets/techoaathshala_logo.png" alt="logo" />
+      </div>
+      <div class="admin-profile">
+        <div class="admin-info" id="adminBtn">
+          <span>Admin</span>
+          <img src="./assets/admin-profile.png" alt="profile" />
+        </div>
+        <div class="dropdown" id="dropdown">
+          <div>
+            <img
+              src="./assets/admin-profile.png"
+              style="padding: 6px; border-radius: 50%"
+              width="40"
+            />
+            <div>
+              <p><strong>Admin</strong></p>
+              <p style="font-size: 12px; color: gray">admin@gmail.com</p>
+            </div>
+          </div>
+          <button class="logout-btn">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar and Main Content -->
+    <div class="container">
+      <div class="sidebar">
+        <h3>MENU</h3>
+        <a href="#">🏠 Home</a>
+        <a href="#" class="active">👤 Users</a>
+        <a href="#">❓ Quizzes</a>
+      </div>
+      <div class="main-content">Welcome to Admin Page !!!</div>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
