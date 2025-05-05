@@ -1,96 +1,54 @@
-// Utility Functions
-// function simpleHash(str) {
-//   let hash = 0;
-//   for (let i = 0; i < str.length; i++) {
-//     const char = str.charCodeAt(i);
-//     hash = (hash << 5) - hash + char;
-//     hash |= 0;
-//   }
-//   return hash.toString();
-// }
+function signup() {
+  const name = document.getElementById("fullName").value.trim();
+  const email = document.getElementById("emailId").value.trim();
+  const password = document.getElementById("password").value;
 
-function getOrdinalSuffix(rank) {
-  if (rank > 3 && rank < 21) return "th";
-  switch (rank % 10) {
-    case 1:
-      return "st";
-    case 2:
-      return "nd";
-    case 3:
-      return "rd";
-    default:
-      return "th";
+  const nameErr = document.getElementById("name-err");
+  const emailErr = document.getElementById("email-err");
+  const passwordErr = document.getElementById("password-err");
+
+  // Reset errors
+  nameErr.textContent = "";
+  emailErr.textContent = "";
+  passwordErr.textContent = "";
+
+  let hasError = false;
+
+  // Basic validation
+  if (!name) {
+    nameErr.textContent = "Name is required";
+    hasError = true;
   }
-}
 
-// User Management
-function loadUsers() {
-  try {
-    let users = localStorage.getItem("users");
-    return users ? JSON.parse(users) : [];
-  } catch (error) {
-    console.error("Error loading users:", error);
-    return [];
+  if (!email || !email.includes("@")) {
+    emailErr.textContent = "Valid email is required";
+    hasError = true;
   }
-}
 
-function saveUsers(users) {
-  try {
-    localStorage.setItem("users", JSON.stringify(users));
-  } catch (error) {
-    console.error("Error saving users:", error);
+  if (!password || password.length < 6) {
+    passwordErr.textContent = "Password must be at least 6 characters";
+    hasError = true;
   }
-}
 
-function getLoggedInUser() {
-  try {
-    const loggedInUserString = localStorage.getItem("loggedInUser");
-    return loggedInUserString ? JSON.parse(loggedInUserString) : null;
-  } catch (error) {
-    console.error("Error parsing loggedIn user:", error);
-    return null;
+  if (hasError) return;
+
+  // Check if admin already exists
+  if (localStorage.getItem("admin")) {
+    alert("Admin already registered. Please log in.");
+    window.location.href = "index.html"; // Change to your login page if different
+    return;
   }
-}
 
-// Validation Functions
-var nameErr = document.getElementById("name-err");
-var emailErr = document.getElementById("email-err");
-var passwordErr = document.getElementById("password-err");
-
-function validateEmail(email) {
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!emailRegex.test(email)) {
-    emailErr.textContent = "Invalid Email ID";
-    return false;
-  }
-  return true;
-}
-
-function validatePassword(password) {
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
-  if (!passwordRegex.test(password)) {
-    passwordErr.innerHTML =
-      "Password Must Contains at least Uppercase, <br>Lowercase, Number(0-9) and a <br>special character";
-    return false;
-  }
-  return true;
-}
-
-function validateFullName(fullName) {
-  const fullNameRegex = /^[a-zA-Z\s'.-]{2,50}$/;
-  if (!fullNameRegex.test(fullName)) {
-    nameErr.textContent =
-      "Name should not contain any special characters or numbers";
-    return false;
-  }
-  return true;
+  // Save admin to localStorage
+  const admin = { name, email, password };
+  localStorage.setItem("admin", JSON.stringify(admin));
+  alert("Signup successful! Please login.");
+  window.location.href = "index.html"; // Redirect to login page
 }
 
 function togglePassword() {
   const passwordInput = document.getElementById("password");
   const eyeIcon = document.getElementById("eyeIcon");
-
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
     eyeIcon.classList.remove("fa-eye");
@@ -102,97 +60,67 @@ function togglePassword() {
   }
 }
 
-// Auth Functions
-function signup() {
-  nameErr.textContent = "";
-  passwordErr.textContent = "";
-  emailErr.textContent = "";
-
-  const fullName = document.getElementById("fullName").value;
-  const email = document.getElementById("emailId").value;
-  const password = document.getElementById("password").value;
-  const checkbox = document.getElementById("terms");
-
-  if (!fullName || !email || !password) {
-    if (!fullName) nameErr.textContent = "Name is required";
-    if (!password) passwordErr.textContent = "Password is required";
-    if (!email) emailErr.textContent = "Email is required";
-    return;
-  }
-
-  if (
-    !validateFullName(fullName) ||
-    !validateEmail(email) ||
-    !validatePassword(password)
-  ) {
-    return;
-  }
-
-  if (!checkbox.checked) {
-    alert("You must accept the terms and conditions to sign up.");
-    return;
-  }
-
-  const users = loadUsers();
-  if (users.some((user) => user.email === email)) {
-    emailErr.textContent = "Email already registered";
-    return;
-  }
-
-  users.push({ fullName, email, password: password });
-  saveUsers(users);
-  alert("Sign Up Successful");
-  window.location.href = "index.html";
-}
-
 function login() {
-  const email = document.getElementById("emailId").value;
+  const email = document.getElementById("emailId").value.trim();
   const password = document.getElementById("password").value;
 
-  if (!email || !password) {
-    passwordErr.textContent = password ? "" : "Password is required";
-    emailErr.textContent = email ? "" : "Email is required";
+  const emailErr = document.getElementById("email-err");
+  const passwordErr = document.getElementById("password-err");
+
+  // Clear previous error messages
+  emailErr.textContent = "";
+  passwordErr.textContent = "";
+
+  let hasError = false;
+
+  if (!email || !email.includes("@")) {
+    emailErr.textContent = "Please enter a valid email.";
+    hasError = true;
+  }
+
+  if (!password) {
+    passwordErr.textContent = "Password is required.";
+    hasError = true;
+  }
+
+  if (hasError) return;
+
+  const storedAdmin = JSON.parse(localStorage.getItem("admin"));
+
+  if (!storedAdmin) {
+    alert("No admin found. Please sign up first.");
+    window.location.href = "signup.html";
     return;
   }
 
-  if (!validateEmail(email) || !validatePassword(password)) {
-    return;
-  }
-
-  const users = loadUsers();
-  const user = users.find((u) => u.email === email && u.password === password);
-
-  if (user) {
+  if (email === storedAdmin.email && password === storedAdmin.password) {
     localStorage.setItem(
       "loggedInUser",
-      JSON.stringify({
-        email: user.email,
-        fullName: user.fullName
-      })
+      JSON.stringify({ type: "admin", name: storedAdmin.name })
     );
-    alert("Login Successful");
-    window.location.href = "home.html";
+    alert("Login successful!");
+    window.location.href = "admin.html"; // 🔁 Change this to your actual dashboard page
   } else {
-    alert("Invalid Email or Password");
+    alert("Invalid email or password.");
   }
 }
 
-function logout() {
-  localStorage.removeItem("loggedInUser");
-  window.location.href = "index.html";
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("show");
 }
 
 //  Admin Page Javascript
 
-const adminBtn = document.getElementById('adminBtn');
-const dropdown = document.getElementById('dropdown');
+const adminBtn = document.getElementById("adminBtn");
+const dropdown = document.getElementById("dropdown");
 
-adminBtn.addEventListener('click', () => {
-  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+adminBtn.addEventListener("click", () => {
+  dropdown.style.display =
+    dropdown.style.display === "block" ? "none" : "block";
 });
 
-document.addEventListener('click', (e) => {
+document.addEventListener("click", (e) => {
   if (!adminBtn.contains(e.target) && !dropdown.contains(e.target)) {
-    dropdown.style.display = 'none';
+    dropdown.style.display = "none";
   }
 });
