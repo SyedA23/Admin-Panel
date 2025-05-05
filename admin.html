@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body>
     <!-- Navbar -->
     <div class="navbar">
       <div class="logo">
         <img src="./assets/techoaathshala_logo.png" alt="logo" />
+        <i class="fa fa-bars hamburger" onclick="toggleSidebar()"></i>
       </div>
+
       <div class="admin-profile">
         <div class="admin-info" id="adminBtn">
           <span>Admin</span>
@@ -37,6 +43,7 @@
     <!-- Sidebar and Main Content -->
     <div class="container">
       <div class="sidebar">
+        <i class="fa fa-times close-btn" onclick="toggleSidebar()"></i>
         <h3>MENU</h3>
         <a href="#" class="active">🏠 Home</a>
         <a href="#">👤 Users</a>
